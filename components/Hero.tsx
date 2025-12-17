@@ -1,9 +1,14 @@
+
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from './ui/Button';
 import { ChevronRight, FileText, CheckCircle, Zap } from 'lucide-react';
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  onStart: () => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ onStart }) => {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 100]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -55,7 +60,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-4"
         >
-          <Button variant="primary" className="h-12 px-8 text-lg !rounded-md">Start for free</Button>
+          <Button onClick={onStart} variant="primary" className="h-12 px-8 text-lg !rounded-md">Start for free</Button>
           <Button variant="secondary" className="h-12 px-8 text-lg group !rounded-md">
             View the demo <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
           </Button>

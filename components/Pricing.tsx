@@ -1,9 +1,14 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/Button';
 import { Check } from 'lucide-react';
 
-export const Pricing: React.FC = () => {
+interface PricingProps {
+  onStart: () => void;
+}
+
+export const Pricing: React.FC<PricingProps> = ({ onStart }) => {
   const [isAnnual, setIsAnnual] = useState(true);
 
   return (
@@ -69,7 +74,7 @@ export const Pricing: React.FC = () => {
                  ))}
                </ul>
 
-               <Button variant={tier.highlight ? 'primary' : 'secondary'} className="w-full">
+               <Button onClick={onStart} variant={tier.highlight ? 'primary' : 'secondary'} className="w-full">
                  {tier.price === 'Custom' ? 'Contact Sales' : 'Get Started'}
                </Button>
             </div>
